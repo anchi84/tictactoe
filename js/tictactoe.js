@@ -32,7 +32,7 @@ function main() {
                             $(this).html('X').off('click');
                         }
                         
-                        if(count >= 5 && count < 9) {
+                        if(count >= 5 && count <= 9) {
                             if(three("X")) {
                                 $("#res").html("Player X wins");
                             } else if(three("O")) {
@@ -45,10 +45,11 @@ function main() {
                                 $("#res").html("Player O wins");
                             }*/
 
-                        } else if(count == 9){
+                        }
+                         
+                        if(count == 9 && !three("X") && !three("O")){
                             $("#res").html("No one wins");
                         }
-
 
                         count++;   
                     });
