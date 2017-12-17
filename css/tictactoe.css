@@ -1,6 +1,43 @@
+body {
+	background: #ECF542;
+	margin: 30px;
+}
+
 td {
-    border: 1px solid;
     height: 50px;
     width: 50px;
     text-align: center;
+    font-weight: bold;
+}
+
+tr {
+	border: 2px solid;
+	border-left: none;
+	border-right: none;
+}
+
+tr:nth-child(1) {
+	border-top: none;
+}
+
+tr:nth-last-child(1) {
+	border-bottom: none;
+}
+
+td:nth-child(2) {
+	border: 2px solid;
+	border-top: none;
+	border-bottom: none;
+}
+
+#start {
+	background: #8E5AC3;
+	border: 1px solid #8E5AC3;
+	border-radius: 10px;
+	font-weight: bold;
+}
+
+#res {
+	margin: 10px 0px;
+	font-style: italic;
 }
