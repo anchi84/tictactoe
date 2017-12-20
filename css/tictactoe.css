@@ -8,6 +8,7 @@ td {
     width: 50px;
     text-align: center;
     font-weight: bold;
+    cursor: pointer;
 }
 
 tr {
