@@ -4,6 +4,7 @@ function main() {
     var end;
     var count =[];
     var cell = [];
+    var position = -1;
 
     $('#start').click(function() {
         $('#tbl').empty();
@@ -42,11 +43,10 @@ function main() {
                         }
                         
                         if(!end) {
-                            if(sequenceOf("O", 2)) {
-                               /* m = jQuery.inArray(2, count);*/
-                                freeCell().html('O').off('click').addClass("clicked");
-                            } else if(sequenceOf("X", 2)) {
-                                freeCell().html('O').off('click').addClass("clicked");
+                            if(sequenceOf("O", 2) && $('td').eq(position).not(".clicked")) { 
+                                $('td').eq(position).html('O').off('click').addClass("clicked");
+                            } else if(sequenceOf("X", 2) && $('td').eq(position).not(".clicked")) {
+                                $('td').eq(position).html('O').off('click').addClass("clicked");
                             } else {
                                 $('td').not(".clicked").first().html('O').off('click').addClass("clicked");
                             }
@@ -83,15 +83,30 @@ function main() {
                 if (i == j) {
                     if($('#cell_'+i+j).html() == char){
                         count[0]++; // line \
-                    }
+                    } else {
+                        position = $('#cell_'+i+j).index() + 3*i;
+                        console.log(position);
+                    } 
                 }
+            }
+        if(count[0] == n) {
+            return true;     
+        } 
 
+        for(var i = 0; i < 3; i++)
+            for(var j = 0; j < 3; j++) {
                 if(i + j == 2) {
                     if($('#cell_'+i+j).html() == char){
                         count[1]++; // line /
+                    } else {
+                        position = $('#cell_'+i+j).index() + 3*i;
+                        console.log(position);
                     }
                 }
             }
+        if(count[1] == n) {
+            return true;     
+        } 
         
         for(var j = 0; j < 3; j++) {
             if($('#cell_0'+j).html() == char) {
@@ -132,58 +147,6 @@ function main() {
         return false; 
     }
 
-    function freeCell() {
-        for(var i = 0; i < 3; i++)
-            for(var j = 0; j < 3; j++) {
-                if (i == j) {
-                    if($('#cell_'+i+j).html() == char){
-                        count[0]++; // line \
-                        continue;
-                    } else return $('#cell_'+i+j);
-                }
-
-                if(i + j == 2) {
-                    if($('#cell_'+i+j).html() == char){
-                        count[1]++; // line /
-                        continue;
-                    } else return $('#cell_'+i+j);
-                }
-            }
-        
-        for(var j = 0; j < 3; j++) {
-            if($('#cell_0'+j).html() == char) {
-                count[2]++; // first row
-                continue;
-            } else return $('#cell_0'+j);
-
-            if($('#cell_1'+j).html() == char) {
-                count[3]++; // second row
-                continue;
-            } else return $('#cell_1'+j);
-            
-            if($('#cell_2'+j).html() == char) {
-                count[4]++; // third row
-                continue;
-            } else return $('#cell_2'+j);
-        }
-        
-        for(var i = 0; i < 3; i++) {
-            if($('#cell_'+i+'0').html() == char) {
-                count[5]++; // first column
-                continue;
-            } else return $('#cell_'+i+'0');
-            
-            if($('#cell_'+i+'1').html() == char) {
-                count[6]++; // second column
-                continue;
-            } else return $('#cell_'+i+'1');
-            
-            if($('#cell_'+i+'2').html() == char) {
-                count[7]++; // third column
-                continue;
-            } else return $('#cell_'+i+'2');
-        }
-    }
 
     function gameOver(char) {
         $('td').off('click');
